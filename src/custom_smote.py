@@ -3,7 +3,7 @@ import pandas as pd
 from collections import Counter
 from imblearn.over_sampling import SMOTE
 
-class CUSTOM_SMOTE:
+class CustomSMOTE:
     def __init__(self):
         pass
 
@@ -80,11 +80,11 @@ class CUSTOM_SMOTE:
 
 
 if __name__ == "__main__":
-    X_train = pd.read_csv('../Database/X_train.csv', index_col=0)
-    y_train = pd.read_csv('../Database/y_train.csv', index_col=0)
+    X_train = pd.read_csv('../data/X_train.csv', index_col=0)
+    y_train = pd.read_csv('../data/y_train.csv', index_col=0)
     # SMOTE 적용
     features = [0, 2, 4, 6, 11, 12]
-    S = CUSTOM_SMOTE()
+    S = CustomSMOTE()
     X_balanced, y_balanced = S.SMOTE(X_train, y_train, 5, features)
 
     smote = SMOTE(sampling_strategy='minority', random_state=42)

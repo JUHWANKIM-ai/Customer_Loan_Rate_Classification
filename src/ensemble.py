@@ -6,7 +6,7 @@ from catboost import CatBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 
 
-class Esemble:
+class Ensemble:
     def __init__(self, method, X_train, X_val, y_train, y_val, num_rounds, sampling_name):
         self.method = method
         self.X_train = X_train
@@ -28,7 +28,7 @@ class Esemble:
         predictions = y_pred.argmax(axis=1)
         accuracy = f1_score(self.y_test, predictions, average='micro')
 
-        # joblib.dump(bst, f'Files/dt_{self.name}_model.pkl')
+        # joblib.dump(bst, f'results/dt_{self.name}_model.pkl')
         print("DT F1-Score:", accuracy)
         return accuracy
 
@@ -39,7 +39,7 @@ class Esemble:
         predictions = y_pred.argmax(axis=1)
         accuracy = f1_score(self.y_test, predictions, average='micro')
 
-        # joblib.dump(bst, f'Files/lgb_{self.name}_model.pkl')
+        # joblib.dump(bst, f'results/lgb_{self.name}_model.pkl')
         print("lightGBM F1-Score:", accuracy)
         return accuracy
 
@@ -50,7 +50,7 @@ class Esemble:
         predictions = y_pred.argmax(axis=1)
         accuracy = f1_score(self.y_test, predictions, average='micro')
 
-        # joblib.dump(bst, f'Files/xgb_{self.name}_model.pkl')
+        # joblib.dump(bst, f'results/xgb_{self.name}_model.pkl')
         print("XGBoost F1-Score:", accuracy)
         return accuracy
 
@@ -61,7 +61,7 @@ class Esemble:
         predictions = y_pred.argmax(axis=1)
         accuracy = f1_score(self.y_test, predictions, average='micro')
 
-        # joblib.dump(bst, f'Files/cat_{self.name}_model.pkl')
+        # joblib.dump(bst, f'results/cat_{self.name}_model.pkl')
         print("CatBoost F1-Score:", accuracy)
         return accuracy
 
@@ -129,8 +129,8 @@ class Esemble:
 
             bst = DecisionTreeClassifier(**best_params)
             bst.fit(self.X_train, self.y_train)
-            joblib.dump(bst, f'Files/dt_{self.name}_model.pkl')
-            self.save_dict_to_txt(f'Files/dt_{self.name}_params.txt', best_params)
+            joblib.dump(bst, f'results/dt_{self.name}_model.pkl')
+            self.save_dict_to_txt(f'results/dt_{self.name}_params.txt', best_params)
             print(f'{f1_score(self.y_test, bst.predict(self.X_test), average="micro"):.4f}')
             print("Model saved!")
 
@@ -147,8 +147,8 @@ class Esemble:
 
             bst = LGBMClassifier(**best_params)
             bst.fit(self.X_train, self.y_train, eval_set=[(self.X_test, self.y_test)])
-            joblib.dump(bst, f'Files/lgb_{self.name}_model.pkl')
-            self.save_dict_to_txt(f'Files/lgb_{self.name}_params.txt', best_params)
+            joblib.dump(bst, f'results/lgb_{self.name}_model.pkl')
+            self.save_dict_to_txt(f'results/lgb_{self.name}_params.txt', best_params)
             print(f'{f1_score(self.y_test, bst.predict(self.X_test), average="micro"):.4f}')
             print("Model saved!")
 
@@ -164,8 +164,8 @@ class Esemble:
 
             bst = XGBClassifier(**best_params)
             bst.fit(self.X_train, self.y_train, eval_set=[(self.X_test, self.y_test)], verbose=100)
-            joblib.dump(bst, f'Files/xgb_{self.name}_model.pkl')
-            self.save_dict_to_txt(f'Files/xgb_{self.name}_params.txt', best_params)
+            joblib.dump(bst, f'results/xgb_{self.name}_model.pkl')
+            self.save_dict_to_txt(f'results/xgb_{self.name}_params.txt', best_params)
             print(f'{f1_score(self.y_test, bst.predict(self.X_test), average="micro"):.4f}')
             print("Model saved!")
 
@@ -182,7 +182,7 @@ class Esemble:
 
             bst = CatBoostClassifier(**best_params)
             bst.fit(self.X_train, self.y_train, eval_set=[(self.X_test, self.y_test)], verbose=100)
-            joblib.dump(bst, f'Files/cat_{self.name}_model.pkl')
-            self.save_dict_to_txt(f'Files/cat_{self.name}_params.txt', best_params)
+            joblib.dump(bst, f'results/cat_{self.name}_model.pkl')
+            self.save_dict_to_txt(f'results/cat_{self.name}_params.txt', best_params)
             print(f'{f1_score(self.y_test, bst.predict(self.X_test), average="micro"):.4f}')
             print("Model saved!")

@@ -1,0 +1,15 @@
+# Pipeline dependencies (main.py, src/, notebooks). Versions are not pinned:
+# the original environment was not recorded, only that it ran on CPython 3.11.
+catboost
+imbalanced-learn
+ipython
+joblib
+lightgbm
+matplotlib
+numpy
+optuna
+pandas
+scikit-learn
+scipy
+seaborn
+xgboost
